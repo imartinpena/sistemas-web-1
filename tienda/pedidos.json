@@ -1,0 +1,397 @@
+{
+  "pedidos": [
+    {
+      "id": 1,
+      "cliente": "Juan Pérez",
+      "fecha": "2024-09-02",
+      "estado": "Enviado",
+      "productos": [
+        {
+          "nombre": "Camisa",
+          "cantidad": 2,
+          "precio": 29.99
+        },
+        {
+          "nombre": "Pantalones",
+          "cantidad": 1,
+          "precio": 49.99
+        }
+      ],
+      "total": 109.97
+    },
+    {
+      "id": 2,
+      "cliente": "María López",
+      "fecha": "2024-09-01",
+      "estado": "Pendiente",
+      "productos": [
+        {
+          "nombre": "Zapatos",
+          "cantidad": 1,
+          "precio": 89.99
+        },
+        {
+          "nombre": "Cinturón",
+          "cantidad": 1,
+          "precio": 19.99
+        },
+        {
+          "nombre": "Sombrero",
+          "cantidad": 2,
+          "precio": 14.99
+        }
+      ],
+      "total": 139.96
+    },
+    {
+      "id": 3,
+      "cliente": "Carlos García",
+      "fecha": "2024-08-31",
+      "estado": "Cancelado",
+      "productos": [
+        {
+          "nombre": "Chaqueta",
+          "cantidad": 1,
+          "precio": 79.99
+        }
+      ],
+      "total": 79.99
+    },
+    {
+      "id": 4,
+      "cliente": "Ana Rodríguez",
+      "fecha": "2024-08-30",
+      "estado": "Enviado",
+      "productos": [
+        {
+          "nombre": "Falda",
+          "cantidad": 3,
+          "precio": 24.99
+        },
+        {
+          "nombre": "Blusa",
+          "cantidad": 2,
+          "precio": 34.99
+        }
+      ],
+      "total": 144.95
+    },
+    {
+      "id": 5,
+      "cliente": "Luis Martínez",
+      "fecha": "2024-08-29",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "nombre": "Reloj",
+          "cantidad": 1,
+          "precio": 199.99
+        },
+        {
+          "nombre": "Pulsera",
+          "cantidad": 2,
+          "precio": 29.99
+        },
+        {
+          "nombre": "Anillo",
+          "cantidad": 1,
+          "precio": 99.99
+        }
+      ],
+      "total": 359.96
+    },
+    {
+      "id": 6,
+      "cliente": "Sofía Hernández",
+      "fecha": "2024-08-28",
+      "estado": "Pendiente",
+      "productos": [
+        {
+          "nombre": "Mochila",
+          "cantidad": 1,
+          "precio": 49.99
+        },
+        {
+          "nombre": "Gafas de sol",
+          "cantidad": 1,
+          "precio": 59.99
+        }
+      ],
+      "total": 109.98
+    },
+    {
+      "id": 7,
+      "cliente": "Miguel Torres",
+      "fecha": "2024-08-27",
+      "estado": "Enviado",
+      "productos": [
+        {
+          "nombre": "Camiseta",
+          "cantidad": 4,
+          "precio": 19.99
+        },
+        {
+          "nombre": "Gorra",
+          "cantidad": 2,
+          "precio": 9.99
+        }
+      ],
+      "total": 99.94
+    },
+    {
+      "id": 8,
+      "cliente": "Isabel Fernández",
+      "fecha": "2024-08-26",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "nombre": "Vestido",
+          "cantidad": 1,
+          "precio": 89.99
+        },
+        {
+          "nombre": "Bolso",
+          "cantidad": 1,
+          "precio": 49.99
+        }
+      ],
+      "total": 139.98
+    },
+    {
+      "id": 9,
+      "cliente": "Daniel Ramírez",
+      "fecha": "2024-08-25",
+      "estado": "Cancelado",
+      "productos": [
+        {
+          "nombre": "Pantalones cortos",
+          "cantidad": 2,
+          "precio": 29.99
+        }
+      ],
+      "total": 59.98
+    },
+    {
+      "id": 10,
+      "cliente": "Laura Jiménez",
+      "fecha": "2024-08-24",
+      "estado": "Enviado",
+      "productos": [
+        {
+          "nombre": "Bufanda",
+          "cantidad": 1,
+          "precio": 19.99
+        },
+        {
+          "nombre": "Guantes",
+          "cantidad": 1,
+          "precio": 14.99
+        },
+        {
+          "nombre": "Gorro",
+          "cantidad": 1,
+          "precio": 9.99
+        }
+      ],
+      "total": 44.97
+    },
+    {
+      "id": 11,
+      "cliente": "Raúl Sánchez",
+      "fecha": "2024-08-23",
+      "estado": "Pendiente",
+      "productos": [
+        {
+          "nombre": "Chaqueta de cuero",
+          "cantidad": 1,
+          "precio": 149.99
+        },
+        {
+          "nombre": "Botas",
+          "cantidad": 1,
+          "precio": 89.99
+        }
+      ],
+      "total": 239.98
+    },
+    {
+      "id": 12,
+      "cliente": "Elena Castillo",
+      "fecha": "2024-08-22",
+      "estado": "Enviado",
+      "productos": [
+        {
+          "nombre": "Sudadera",
+          "cantidad": 2,
+          "precio": 39.99
+        }
+      ],
+      "total": 79.98
+    },
+    {
+      "id": 13,
+      "cliente": "Antonio Vargas",
+      "fecha": "2024-08-21",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "nombre": "Corbata",
+          "cantidad": 3,
+          "precio": 14.99
+        },
+        {
+          "nombre": "Camisa de vestir",
+          "cantidad": 2,
+          "precio": 29.99
+        }
+      ],
+      "total": 104.95
+    },
+    {
+      "id": 14,
+      "cliente": "Verónica Morales",
+      "fecha": "2024-08-20",
+      "estado": "Cancelado",
+      "productos": [
+        {
+          "nombre": "Zapatos de tacón",
+          "cantidad": 1,
+          "precio": 79.99
+        }
+      ],
+      "total": 79.99
+    },
+    {
+      "id": 15,
+      "cliente": "Fernando Ruiz",
+      "fecha": "2024-08-19",
+      "estado": "Pendiente",
+      "productos": [
+        {
+          "nombre": "Calcetines",
+          "cantidad": 5,
+          "precio": 5.99
+        },
+        {
+          "nombre": "Camiseta deportiva",
+          "cantidad": 1,
+          "precio": 25.99
+        }
+      ],
+      "total": 55.94
+    },
+    {
+      "id": 16,
+      "cliente": "Patricia López",
+      "fecha": "2024-08-18",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "nombre": "Traje de baño",
+          "cantidad": 2,
+          "precio": 19.99
+        },
+        {
+          "nombre": "Sombrilla de playa",
+          "cantidad": 1,
+          "precio": 29.99
+        }
+      ],
+      "total": 69.97
+    },
+    {
+      "id": 17,
+      "cliente": "Diego Mendoza",
+      "fecha": "2024-08-17",
+      "estado": "Enviado",
+      "productos": [
+        {
+          "nombre": "Jeans",
+          "cantidad": 2,
+          "precio": 49.99
+        },
+        {
+          "nombre": "Cinturón de cuero",
+          "cantidad": 1,
+          "precio": 19.99
+        }
+      ],
+      "total": 119.97
+    },
+    {
+      "id": 18,
+      "cliente": "Clara Ortega",
+      "fecha": "2024-08-16",
+      "estado": "Pendiente",
+      "productos": [
+        {
+          "nombre": "Pijama",
+          "cantidad": 3,
+          "precio": 24.99
+        }
+      ],
+      "total": 74.97
+    },
+    {
+      "id": 19,
+      "cliente": "Javier Delgado",
+      "fecha": "2024-08-15",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "nombre": "Chaqueta impermeable",
+          "cantidad": 1,
+          "precio": 59.99
+        },
+        {
+          "nombre": "Botas de lluvia",
+          "cantidad": 1,
+          "precio": 49.99
+        }
+      ],
+      "total": 109.98
+    },
+    {
+      "id": 20,
+      "cliente": "Marta Herrera",
+      "fecha": "2024-08-14",
+      "estado": "Cancelado",
+      "productos": [
+        {
+          "nombre": "Blusa de encaje",
+          "cantidad": 2,
+          "precio": 39.99
+        }
+      ],
+      "total": 79.98
+    },
+    {
+      "id": 21,
+      "cliente": "Nacho Chinchu",
+      "fecha": "2024-09-02",
+      "estado": "Pendiente",
+      "productos": [
+        {
+          "nombre": "Gafas",
+          "cantidad": 1,
+          "precio": 19.99
+        }
+      ],
+      "total": 19.99
+    },
+    {
+      "id": 22,
+      "cliente": "Maria Uria",
+      "fecha": "2024-09-15",
+      "estado": "Pendiente",
+      "productos": [
+        {
+          "nombre": "Camiseta",
+          "cantidad": 2,
+          "precio": 4.99
+        }
+      ],
+      "total": 9.98
+    }
+  ]
+}

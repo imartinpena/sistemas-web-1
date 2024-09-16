@@ -1,0 +1,24 @@
+<%- include("header", {}) %>
+<h1>Register</h1>
+<form method="post" action="/register" onsubmit="return validateForm()">
+    <p><label>Username: </label> <input type="text" name="user" required></p>
+    <p><label>Password: </label> <input type="password" id="pass" name="pass" required></p>
+    <p><label>Confirm Password: </label> <input type="password" id="confirm_pass" required></p>
+    <button type="submit">Submit</button>
+</form>
+<script>
+    function validateForm() {
+        var password = document.getElementById("pass").value;
+        var confirmPassword = document.getElementById("confirm_pass").value;
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        if (password.length < 8) {
+            alert("Password must be at least 8 characters long.");
+            return false;
+        }
+        return true;
+    }
+</script>
+<%- include("footer", {}) %>

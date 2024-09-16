@@ -1,0 +1,41 @@
+<%- include("header") %>
+
+<h1><%= title %></h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Password (Hashed)</th>
+            <% if (user && user.username === 'admin') { %>
+                <th>Action</th>
+            <% } %>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (allUsers && allUsers.length > 0) { %>
+            <% for (let i = 0; i < allUsers.length; i++) { %>
+                <tr>
+                    <td><%= allUsers[i].username %></td>
+                    <td><%= allUsers[i].hash %></td>
+                    <% if (user && user.username === 'admin' && allUsers[i].username !== 'admin') { %>
+                        <td>
+                            <button type="button" class="delete-button" onclick="deleteUser('<%= allUsers[i].username %>')">Delete</button>
+                        </td>
+                    <% } else { %>
+                        <td></td>
+                    <% } %>
+                </tr>
+            <% } %>
+        <% } else { %>
+            <tr>
+                <td colspan="3">No users found</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<!-- Incluir el script de eliminación de usuario -->
+<script type="text/javascript" src="/js/deleteUser.js"></script>
+
+<%- include("footer") %>
