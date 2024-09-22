@@ -1,0 +1,22 @@
+<%- include("header") %> <!-- Incluir el encabezado común -->
+
+<div class="container">
+    <h1><%= title %></h1> <!-- Título dinámico -->
+    <ol>
+        <% pedidos.forEach(function(pedido) { %>
+            <li>
+                <strong>Cliente:</strong> <%= pedido.cliente %>
+                <dl>
+                    <dt>ID:</dt>
+                    <dd><%= pedido.id %></dd>
+                    <dt>Fecha:</dt>
+                    <dd><%= pedido.fecha %></dd>
+                    <dt>Detalles:</dt>
+                    <dd><a href="/orders/<%= pedido.id %>">Ver mas detalles del pedido</a></dd>
+                </dl>
+            </li>
+        <% }); %>
+    </ol>
+</div>
+
+<%- include("footer") %> <!-- Incluir el pie de página común -->

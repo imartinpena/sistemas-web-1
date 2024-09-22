@@ -1,0 +1,27 @@
+<%- include("header") %> <!-- Incluir el encabezado común -->
+
+<div class="container">
+    <h1><%= title %></h1> <!-- Título dinámico -->
+    <div class="order-details">
+        <p><strong>ID del pedido:</strong> <%= pedido.id %></p>
+        <p><strong>Cliente:</strong> <%= pedido.cliente %></p>
+        <p><strong>Fecha:</strong> <%= pedido.fecha %></p>
+        <p><strong>Estado:</strong> <%= pedido.estado %></p>
+
+        <h3>Productos:</h3>
+        <ul>
+            <% pedido.productos.forEach(function(producto) { %>
+                <li>
+                    <strong>Nombre:</strong> <%= producto.nombre %> <br>
+                    <strong>Cantidad:</strong> <%= producto.cantidad %> <br>
+                    <strong>Precio:</strong> $<%= producto.precio.toFixed(2) %>
+                </li>
+            <% }); %>
+        </ul>
+
+        <p><strong>Total del pedido:</strong> $<%= pedido.total.toFixed(2) %></p>
+    </div>
+    <a href="/orders" class="btn btn-primary">Volver a la lista de pedidos</a>
+</div>
+
+<%- include("footer") %> <!-- Incluir el pie de página común -->

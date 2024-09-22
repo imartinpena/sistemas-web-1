@@ -1,0 +1,121 @@
+#!/usr/bin/env node
+
+const app = require('../app'); // Importa la aplicación Express
+const debug = require('debug')('expresslogin:server'); // Herramienta para el debug
+const http = require('http'); // Módulo para crear el servidor HTTP
+const socketIo = require('socket.io'); // Socket.io para la comunicación en tiempo real
+
+// Obtener el puerto del entorno (o usar 3000 por defecto) y configurarlo en Express
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+// Crear el servidor HTTP usando la aplicación Express
+const server = http.createServer(app);
+
+// Configurar Socket.io para el servidor
+const io = socketIo(server);
+
+// Arrays para almacenar los mensajes del chat grupal y de los chats privados
+let mensajes = []; // Mensajes del chat grupal
+let mensajesPrivados = {}; // Mensajes del chat privado organizados por salas
+
+// Función para obtener un nombre de sala único basado en los usuarios (alfabéticamente ordenados)
+function getRoomName(user1, user2) {
+  return [user1, user2].sort().join('-'); // Esto asegura que no haya duplicados de salas
+}
+
+// Función para guardar un mensaje privado en la sala correspondiente
+function savePrivateMessage(from, to, message) {
+  const room = getRoomName(from, to); // Obtener el nombre de la sala
+  const nuevoMensaje = { from, to, message, timestamp: new Date().toLocaleString() }; // Estructura del mensaje
+
+  // Si no existe la sala, la creamos
+  if (!mensajesPrivados[room]) {
+    mensajesPrivados[room] = [];
+  }
+
+  // Añadimos el nuevo mensaje al historial de la sala
+  mensajesPrivados[room].push(nuevoMensaje);
+}
+
+// Función para obtener el historial de mensajes privados entre dos usuarios
+function getPrivateMessages(from, to) {
+  const room = getRoomName(from, to); // Obtener el nombre de la sala
+  return mensajesPrivados[room] || []; // Retornar el historial o un array vacío si no hay mensajes
+}
+
+// Configurar eventos de Socket.io para gestionar conexiones y eventos de chat
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Gestión del chat grupal
+  socket.emit('chat history', mensajes); // Enviar historial de mensajes del chat grupal al usuario conectado
+  socket.on('chat message', (data) => { // Escuchar mensajes enviados en el chat grupal
+    const nuevoMensaje = { 
+      username: data.username, 
+      message: data.message, 
+      timestamp: new Date().toLocaleString() 
+    };
+    mensajes.push(nuevoMensaje); // Almacenar el mensaje en el array de mensajes del chat grupal
+    io.emit('chat message', nuevoMensaje); // Emitir el mensaje a todos los usuarios conectados
+  });
+
+  // Gestión del chat privado
+  socket.on('join private chat', (data) => { // El usuario se une a una sala de chat privado
+    const room = getRoomName(data.from, data.to); // Determinar el nombre de la sala
+    socket.join(room); // El usuario se une a la sala
+    socket.emit('private message history', getPrivateMessages(data.from, data.to)); // Enviar historial de mensajes privados
+  });
+
+  socket.on('private message', (data) => { // Escuchar mensajes enviados en un chat privado
+    const room = getRoomName(data.from, data.to); // Determinar la sala a la que pertenece el mensaje
+    const nuevoMensaje = { from: data.from, message: data.message, timestamp: new Date().toLocaleString() };
+    io.to(room).emit('private message', nuevoMensaje); // Enviar el mensaje a todos los usuarios en la sala
+    savePrivateMessage(data.from, data.to, data.message); // Guardar el mensaje en el historial
+  });
+
+  // Evento de desconexión de un usuario
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
+
+// Iniciar el servidor y escuchar en el puerto configurado
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+server.on('error', onError); // Manejar errores del servidor
+server.on('listening', onListening); // Evento de inicio de escucha
+
+// Normalizar el puerto en un número, cadena o false
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+  if (isNaN(port)) return val; // Si no es un número, devolver como cadena
+  if (port >= 0) return port; // Si es un número válido, devolverlo
+  return false; // Si no es válido, devolver false
+}
+
+// Manejar errores del servidor
+function onError(error) {
+  if (error.syscall !== 'listen') throw error;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+// Evento que indica que el servidor está escuchando correctamente
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

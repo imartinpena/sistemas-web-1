@@ -1,0 +1,45 @@
+<%- include("header", {}) %>
+<h1>CHAT</h1>
+<ul id="messages">
+    <% if (mensajes && mensajes.length > 0) { %>
+        <% mensajes.forEach(function(mensaje) { %>
+            <li><strong><%= mensaje.username %>:</strong> <%= mensaje.message %> <em>(<%= mensaje.timestamp %>)</em></li>
+        <% }) %>
+    <% } %>
+</ul>
+<form id="form" action="" class="chat">
+    <input id="input" autocomplete="off" placeholder="Escribe tu mensaje aquí" /><button type="submit">Enviar</button>
+</form>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Pasamos la variable de usuario desde el servidor al archivo JS
+    var username = '<%= user.username %>';
+  </script>
+<script src="/js/chatTiempoReal.js"></script>
+<!--    $(function () {
+        var socket = io();
+
+        // Enviar mensaje al servidor
+        $('form').submit(function(e) {
+            e.preventDefault(); // Previene la recarga de la página
+            socket.emit('chat message', { message: $('#input').val(), username: '<%= user.username %>' });
+            $('#input').val('');
+            return false;
+        });
+
+        // Recibir mensajes existentes
+        socket.on('chat history', function(mensajes) {
+            mensajes.forEach(function(mensaje) {
+                $('#messages').append($('<li>').html('<strong>' + mensaje.username + ':</strong> ' + mensaje.message + ' <em>(' + mensaje.timestamp + ')</em>'));
+            });
+        });
+
+        // Recibir nuevos mensajes
+        socket.on('chat message', function(data) {
+            $('#messages').append($('<li>').html('<strong>' + data.username + ':</strong> ' + data.message + ' <em>(' + data.timestamp + ')</em>'));
+        });
+    });
+</script>
+-->
+<%- include("footer", {}) %>
