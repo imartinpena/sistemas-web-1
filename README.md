@@ -31,7 +31,7 @@ i.martinpena
 105462
 ```
 ```
-git add falta por completar
+git add *
 ```
 ```
 git commit -m "subida proyecto"
