@@ -22,7 +22,7 @@ git config --global user.email i.martinpena@usp.ceu.es
 
 ## Clonar REPO
 ```
-git clone https://git.eps.ceu.es/sw2/examen/i.martinpena
+git clone https://git.eps.ceu.es/sw1/examen/i.martinpena
 ```
 ```
 i.martinpena
