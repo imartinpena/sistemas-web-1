@@ -1,0 +1,76 @@
+<%- include('header') %>
+
+<div class="container">
+    <h1><%= title %></h1>
+
+    <!-- Formulario para agregar nuevos pedidos -->
+    <h2>Agregar nuevo pedido</h2>
+    <form action="/ordersObject/agregar" method="POST">
+        <label for="cliente">Cliente:</label>
+        <input type="text" name="cliente" id="cliente" required>
+        <br>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" id="fecha" required>
+        <br>
+
+        <label for="estado">Estado:</label>
+        <select name="estado" id="estado" required>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Enviado">Enviado</option>
+            <option value="Entregado">Entregado</option>
+            <option value="Cancelado">Cancelado</option>
+        </select>
+        <br>
+
+        <!-- Productos dinámicos -->
+        <h3>Productos</h3>
+        <div id="productos">
+            <div class="producto">
+                <label for="nombre">Nombre del producto:</label>
+                <input type="text" name="productos[0]" required>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="productos[1]" min="1" required>
+                <label for="precio">Precio:</label>
+                <input type="number" step="0.01" name="productos[2]" required>
+            </div>
+        </div>
+        <button type="button" id="agregarProducto">Agregar otro producto</button>
+        <br>
+
+        <!-- Botón para enviar el formulario -->
+        <button type="submit">Agregar Pedido</button>
+    </form>
+
+</div>
+
+<!-- Script para agregar dinámicamente más productos -->
+<script>
+    let productIndex = 3; // Inicia en 3 porque ya tenemos el primer producto (index 0, 1, 2)
+    document.getElementById('agregarProducto').addEventListener('click', function () {
+        const productosDiv = document.getElementById('productos');
+        const newProductDiv = document.createElement('div');
+        newProductDiv.classList.add('producto');
+        newProductDiv.innerHTML = `
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" name="productos[${productIndex}]" required>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" name="productos[${productIndex + 1}]" min="1" required>
+            <label for="precio">Precio:</label>
+            <input type="number" step="0.01" name="productos[${productIndex + 2}]" required>
+        `;
+        productosDiv.appendChild(newProductDiv);
+        productIndex += 3;
+    });
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    // Escuchar el evento "nuevoPedido" para recibir notificaciones de nuevos pedidos
+    socket.on('nuevoPedido', function(pedido) {
+        alert(`Nuevo pedido de ${pedido.cliente} agregado. Fecha: ${pedido.fecha}, Estado: ${pedido.estado}`);
+    });
+</script>
+
+<%- include('footer') %>

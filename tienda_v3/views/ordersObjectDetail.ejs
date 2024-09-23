@@ -1,0 +1,45 @@
+<%- include('header') %>
+<h1><%= title %></h1>
+<div class="container">
+    <!-- Detalles del pedido -->
+    <h2>Detalles del pedido</h2>
+    <ul>
+        <li><strong>ID:</strong> <%= pedido.id %></li>
+        <li><strong>Cliente:</strong> <%= pedido.cliente %></li>
+        <li><strong>Fecha:</strong> <%= pedido.fecha %></li>
+        <li><strong>Estado:</strong> <%= pedido.estado %></li>
+        <li><strong>Productos:</strong>
+            <ul>
+                <% pedido.productos.forEach(producto => { %>
+                    <li>
+                        <p><strong>Nombre:</strong> <%= producto.nombre %></p> 
+                        <p><strong>Cantidad:</strong> <%= producto.cantidad %></p> 
+                        <p><strong>Precio:</strong> $<%= producto.precio %></p>
+                    </li>
+                <% }) %>
+            </ul>
+        </li>
+        <li><strong>Total:</strong> $<%= pedido.total %></li>
+    </ul>
+
+    <!-- Formulario para actualizar el estado del pedido -->
+    <h3>Actualizar Estado del Pedido</h3>
+    <form action="/ordersObject/<%= pedido.id %>?_method=PUT" method="POST">
+        <label for="estado">Estado:</label>
+        <select name="estado" id="estado">
+            <option value="pendiente" <%= pedido.estado === 'pendiente' ? 'selected' : '' %>>Pendiente</option>
+            <option value="enviado" <%= pedido.estado === 'enviado' ? 'selected' : '' %>>Enviado</option>
+            <option value="entregado" <%= pedido.estado === 'entregado' ? 'selected' : '' %>>Entregado</option>
+            <option value="cancelado" <%= pedido.estado === 'cancelado' ? 'selected' : '' %>>Cancelado</option>
+        </select>
+        <button type="submit">Actualizar Pedido</button>
+    </form>
+    <br>
+    <!-- Formulario para eliminar pedido -->
+    <form action="/ordersObject/<%= pedido.id %>?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este pedido?');">
+        <button type="submit" class="btn btn-danger">Eliminar Pedido</button>
+    </form>
+    <br>
+    <a href="/ordersObject" class="btn btn-primary">Volver a la lista de pedidos</a>
+</div>
+<%- include('footer') %>

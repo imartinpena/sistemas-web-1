@@ -1,0 +1,45 @@
+<%- include("header") %>
+
+<h1>Chat privado con <%= chatUser %></h1>
+<ul id="messages">
+    <!-- Aquí se mostrarán los mensajes privados -->
+</ul>
+<form id="form" action="">
+    <input id="input" autocomplete="off" placeholder="Escribe tu mensaje aquí" />
+    <button type="submit">Enviar</button>
+</form>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    // Unirse al chat privado
+    socket.emit('join private chat', { from: '<%= user.username %>', to: '<%= chatUser %>' });
+
+    // Enviar mensaje privado
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = document.getElementById('input').value;
+        socket.emit('private message', { from: '<%= user.username %>', to: '<%= chatUser %>', message: message });
+        document.getElementById('input').value = '';
+    });
+
+    // Recibir historial de mensajes privados
+    socket.on('private message history', function(messages) {
+        const messageList = document.getElementById('messages');
+        messages.forEach(function(msg) {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${msg.from}:</strong> ${msg.message} <em>(${msg.timestamp})</em>`;
+            messageList.appendChild(li);
+        });
+    });
+
+    // Recibir nuevos mensajes privados
+    socket.on('private message', function(data) {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${data.from}:</strong> ${data.message} <em>(${data.timestamp})</em>`;
+        document.getElementById('messages').appendChild(li);
+    });
+</script>
+
+<%- include("footer") %>

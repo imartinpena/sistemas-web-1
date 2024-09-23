@@ -1,0 +1,40 @@
+<%- include("header") %> <!-- Incluir el encabezado común -->
+
+<div class="container">
+    <h1><%= title %></h1> <!-- Título dinámico -->
+    <form action="/orders/addOrder" method="POST">
+        <div class="form-group">
+            <label for="cliente">Cliente:</label>
+            <input type="text" class="form-control" id="cliente" name="cliente" required>
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" required>
+        </div>
+        <div class="form-group">
+            <label for="estado">Estado:</label>
+            <select class="form-control" id="estado" name="estado" required>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Enviado">Enviado</option>
+                <option value="Entregado">Entregado</option>
+                <option value="Cancelado">Cancelado</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nombreProducto">Nombre del Producto:</label>
+            <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" required>
+        </div>
+        <div class="form-group">
+            <label for="cantidadProducto">Cantidad:</label>
+            <input type="number" class="form-control" id="cantidadProducto" name="cantidadProducto" required>
+        </div>
+        <div class="form-group">
+            <label for="precioProducto">Precio del Producto:</label>
+            <input type="number" step="0.01" class="form-control" id="precioProducto" name="precioProducto" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Añadir Pedido</button>
+    </form>
+    <a href="/orders" class="btn btn-secondary mt-3">Volver a la lista de pedidos</a>
+</div>
+
+<%- include("footer") %> <!-- Incluir el pie de página común -->

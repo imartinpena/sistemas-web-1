@@ -1,0 +1,103 @@
+<!-- views/ordersObject.ejs -->
+<%- include('header') %>
+
+<div class="container">
+    <h1><%= title %></h1>
+
+    <!-- Formulario para agregar nuevos pedidos -->
+    <h2>Agregar nuevo pedido</h2>
+    <form action="/ordersObject/agregar" method="POST">
+        <label for="cliente">Cliente:</label>
+        <input type="text" name="cliente" id="cliente" required>
+        <br>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" id="fecha" required>
+        <br>
+
+        <label for="estado">Estado:</label>
+        <select name="estado" id="estado" required>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Enviado">Enviado</option>
+            <option value="Entregado">Entregado</option>
+            <option value="Cancelado">Cancelado</option>
+        </select>
+        <br>
+
+        <!-- Productos dinámicos -->
+        <h3>Productos</h3>
+        <div id="productos">
+            <div class="producto">
+                <label for="nombre">Nombre del producto:</label>
+                <input type="text" name="productos[0].nombre" required>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="productos[0].cantidad" min="1" required>
+                <label for="precio">Precio:</label>
+                <input type="number" step="0.01" name="productos[0].precio" required>
+            </div>
+        </div>
+        <button type="button" id="agregarProducto">Agregar otro producto</button>
+        <br>
+
+        <!-- Botón para enviar el formulario -->
+        <button type="submit">Agregar Pedido</button>
+    </form>
+
+    <!-- Lista de pedidos almacenados -->
+<h2>Lista de pedidos</h2>
+<ol>
+    <% pedidos.forEach(pedido => { %>
+        <li>
+            <ul>
+                <li><strong>ID:</strong> <%= pedido.id %></li>
+                <li><strong>Cliente:</strong> <%= pedido.cliente %></li>
+                <li><strong>Fecha:</strong> <%= pedido.fecha %></li>
+                <!-- Aquí aplicamos la clase CSS dinámica según el estado -->
+                <li><strong>Estado:</strong> <span class="estado <%= pedido.estado.toLowerCase() %>"><%= pedido.estado %></span></li>
+                <li><a href="/ordersObject/<%= pedido.id %>">Ver más detalles del pedido</a></li>
+                <!--
+                <li><strong>Productos:</strong>
+                    <ul>
+                        <% pedido.productos.forEach(producto => { %>
+                            <li><%= producto.nombre %> - Cantidad: <%= producto.cantidad %> - Precio: $<%= producto.precio %></li>
+                        <% }) %>
+                    </ul>
+                </li>
+                <li><strong>Total:</strong> $<%= pedido.total %></li>
+                -->
+            </ul>
+        </li>
+    <% }); %>
+</ol>
+</div>
+
+<!-- Esta forma lo que hace es en vez de añadir toda la funcionalidad en ejs lo añade en la carpeta del cliente que es public -->
+<script src="/js/annadirOtroProducto.js"></script>
+<!--
+    let productIndex = 1;
+    document.getElementById('agregarProducto').addEventListener('click', function () {
+        const productosDiv = document.getElementById('productos');
+        const newProductDiv = document.createElement('div');
+        newProductDiv.classList.add('producto');
+        newProductDiv.innerHTML = `
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" name="productos[${productIndex}].nombre" required>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" name="productos[${productIndex}].cantidad" min="1" required>
+            <label for="precio">Precio:</label>
+            <input type="number" step="0.01" name="productos[${productIndex}].precio" required>
+        `;
+        productosDiv.appendChild(newProductDiv);
+        productIndex++;
+    });
+</script>
+-->
+<script src="/js/estadosPedidos.js"></script>
+<!--
+    document.querySelectorAll('.estado').forEach(function(estadoElemento) {
+        const estadoTexto = estadoElemento.textContent.toLowerCase(); // Obtenemos el texto del estado
+        estadoElemento.classList.add(estadoTexto); // Agregamos la clase correspondiente
+    });
+</script>
+-->
+<%- include('footer') %>

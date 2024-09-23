@@ -1,0 +1,32 @@
+<%- include("header", {}) %>
+    <h1><%= title %></h1>
+
+<div class="container">
+  <h2>Panel de Administración</h2>
+  <div id="orderNotifications"></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  // Escuchar el evento "nuevoPedido" y mostrar la notificación en el contenedor orderNotifications
+  socket.on('nuevoPedido', function(order) {
+    const notification = `Nuevo pedido de ${order.cliente} (Cantidad: ${order.productos.length} productos) enviado el ${order.fecha}`;
+    const notificationsDiv = document.getElementById('orderNotifications');
+    
+    // Crear un nuevo div para la notificación
+    const newNotification = document.createElement('div');
+    newNotification.textContent = notification;
+    
+    // Agregar un estilo a la notificación (opcional)
+    newNotification.style.padding = '10px';
+    newNotification.style.margin = '5px 0';
+    newNotification.style.backgroundColor = 'lightyellow';
+    newNotification.style.border = '1px solid #ccc';
+    
+    // Añadir la notificación al contenedor
+    notificationsDiv.appendChild(newNotification);
+  });
+</script>
+<%- include("footer", {}) %>

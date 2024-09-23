@@ -1,0 +1,10 @@
+<%- include("header") %>
+
+<h1>Chat Privado</h1>
+<ul>
+    <% users.forEach(function(user) { %>
+        <li><a href="/chatPrivate/<%= user.username %>">Chat con <%= user.username %></a></li>
+    <% }) %>
+</ul>
+
+<%- include("footer") %>

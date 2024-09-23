@@ -1,0 +1,59 @@
+/* Estilo básico para el cuerpo de la página */
+body {
+  padding: 50px; /* Añade espacio alrededor del contenido de la página */
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; /* Establece el estilo de la fuente */
+}
+
+/* Estilo para los enlaces */
+a {
+  color: #00B7FF; /* Establece el color azul claro para los enlaces */
+}
+
+/* Estilo para el formulario de chat */
+form.chat {
+  background: lightgray; /* Fondo gris claro para el formulario de chat */
+  padding: 5px; /* Añade espacio interno al formulario */
+  position: fixed; /* Fija el formulario en la parte inferior de la pantalla */
+  display: flex; /* Flexbox para organizar los elementos dentro del formulario */
+  bottom: 0; /* Posición en la parte inferior */
+  left: 0;
+  right: 0; /* Se extiende horizontalmente en toda la pantalla */
+  margin: 0;
+}
+
+/* Estilo para el campo de entrada del chat */
+#input {
+  flex-grow: 1; /* El campo de entrada ocupa todo el espacio disponible */
+}
+
+/* Estilos para el estado del pedido (variable) */
+.estado {
+  font-weight: bold; /* Negrita para resaltar el estado */
+  padding: 5px; /* Espacio interno alrededor del texto */
+  border-radius: 4px; /* Bordes redondeados */
+  display: inline-block; /* Alinea como un bloque en línea */
+}
+
+/* Estilo para el estado 'pendiente' */
+.estado.pendiente {
+  background-color: #f0ad4e; /* Color amarillo/naranja */
+  color: white; /* Texto en blanco */
+}
+
+/* Estilo para el estado 'enviado' */
+.estado.enviado {
+  background-color: #5bc0de; /* Color azul */
+  color: white; /* Texto en blanco */
+}
+
+/* Estilo para el estado 'entregado' */
+.estado.entregado {
+  background-color: #5cb85c; /* Color verde */
+  color: white; /* Texto en blanco */
+}
+
+/* Estilo para el estado 'cancelado' */
+.estado.cancelado {
+  background-color: #d9534f; /* Color rojo */
+  color: white; /* Texto en blanco */
+}
